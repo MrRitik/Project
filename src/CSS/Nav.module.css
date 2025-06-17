@@ -1,0 +1,26 @@
+.appBar {
+    background-color: #2424be;
+    box-shadow: none;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+}
+
+.logo {
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+.links {
+    display: flex;
+    gap: 16px;
+}
+
+.menuButton {
+    display: block;
+}
