@@ -1,17 +1,15 @@
 import { createBrowserRouter } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
-import Login from "./pages/Login";
-import App from "./App";
-import ProtectedRoute from "./components/ProtectedRoute";
-import PrivateRoute from "./components/PrivateRoute";
-import  Unauth from "./pages/Unauth";
-
+import App from "../App";
+import { Home } from "@/pages/home";
+import { Dashboard } from "@/pages/dashboard";
+import { About } from "@/pages/about";
+import ProtectedRoute from "./ProtectedRoute";
+import PrivateRoute from "./PrivateRoute";
+import { Profile } from "@/pages/profile";
+import { Unauth } from "@/pages/Unauth";
+import { Login } from "@/pages/login";
 const isAuthenticated = true;
-const userRole = "admin"; 
-
+const userRole = "admin";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -19,7 +17,6 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       { path: "about", element: <About /> },
-
       {
         path: "profile",
         element: (
@@ -32,24 +29,20 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+      {
+        path: "/dashboard",
+        element: (
+          <PrivateRoute isAuthenticated={isAuthenticated}>
+            <Dashboard />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
-
-  {
-    path: "/dashboard",
-    element: (
-      <PrivateRoute isAuthenticated={isAuthenticated}>
-        <Dashboard />
-      </PrivateRoute>
-    ),
-  },
-
   { path: "/login", element: <Login /> },
-
   {
     path: "/unauthorized",
     element: <Unauth />,
   },
 ]);
-
 export default router;

@@ -1,7 +1,6 @@
 import { Box, Typography, Container } from "@mui/material";
 import Style from "../CSS/Footer.module.css";
-
-const Footer = () => {
+export const Footer = () => {
   return (
     <Box component="footer" className={Style.footer}>
       <Container maxWidth="lg" className={Style.container}>
@@ -12,5 +11,3 @@ const Footer = () => {
     </Box>
   );
 };
-
-export default Footer;
