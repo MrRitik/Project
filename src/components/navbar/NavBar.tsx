@@ -1,6 +1,6 @@
 import { AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import styles from '../CSS/Nav.module.css';
+import styles from '@/CSS/Nav.module.css';
 const isAuthenticated = true;
 const userRole = 'admin';
 export const NavBar = () => {

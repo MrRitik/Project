@@ -1,36 +1,36 @@
-import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import { Home } from "@/pages/home";
-import { Dashboard } from "@/pages/dashboard";
-import { About } from "@/pages/about";
-import ProtectedRoute from "./ProtectedRoute";
-import PrivateRoute from "./PrivateRoute";
-import { Profile } from "@/pages/profile";
-import { Unauth } from "@/pages/Unauth";
-import { Login } from "@/pages/login";
+import { createBrowserRouter } from 'react-router-dom';
+import App from '../App';
+import { Profile } from '@/pages/profile';
+import { Login } from '@/pages/login';
+import { Home } from '@/pages/home';
+import { Dashboard } from '@/pages/dashboard';
+import { About } from '@/pages/about';
+import ProtectedRoute from './ProtectedRoute';
+import PrivateRoute from './PrivateRoute';
+import { Unauth } from '@/pages/Unauth';
 const isAuthenticated = true;
-const userRole = "admin";
+const userRole = 'admin';
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <App />,
     children: [
       { index: true, element: <Home /> },
-      { path: "about", element: <About /> },
+      { path: 'about', element: <About /> },
       {
-        path: "profile",
+        path: 'profile',
         element: (
           <ProtectedRoute
             isAuthenticated={isAuthenticated}
             userRole={userRole}
-            allowedRoles={["admin"]}
+            allowedRoles={['admin']}
           >
             <Profile />
           </ProtectedRoute>
         ),
       },
       {
-        path: "/dashboard",
+        path: '/dashboard',
         element: (
           <PrivateRoute isAuthenticated={isAuthenticated}>
             <Dashboard />
@@ -39,9 +39,9 @@ const router = createBrowserRouter([
       },
     ],
   },
-  { path: "/login", element: <Login /> },
+  { path: '/login', element: <Login /> },
   {
-    path: "/unauthorized",
+    path: '/unauthorized',
     element: <Unauth />,
   },
 ]);

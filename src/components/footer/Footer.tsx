@@ -1,5 +1,5 @@
 import { Box, Typography, Container } from "@mui/material";
-import Style from "../CSS/Footer.module.css";
+import Style from '@/CSS/Footer.module.css';
 export const Footer = () => {
   return (
     <Box component="footer" className={Style.footer}>

@@ -1,13 +1,11 @@
-import type { JSX } from "react";
-import { Navigate } from "react-router-dom";
-
+import type { JSX } from 'react';
+import { Navigate } from 'react-router-dom';
 type ProtectedRouteProps = {
   isAuthenticated: boolean;
   userRole: string;
   allowedRoles: string[];
   children: JSX.Element;
 };
-
 const ProtectedRoute = ({
   isAuthenticated,
   userRole,
@@ -20,5 +18,4 @@ const ProtectedRoute = ({
   }
   return children;
 };
-
 export default ProtectedRoute;
