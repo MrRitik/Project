@@ -8,6 +8,7 @@ import { About } from '@/pages/about';
 import ProtectedRoute from './ProtectedRoute';
 import PrivateRoute from './PrivateRoute';
 import { Unauth } from '@/pages/Unauth';
+import { Contact } from '@/pages/contact';
 const isAuthenticated = true;
 const userRole = 'admin';
 const router = createBrowserRouter([
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      { path: 'contact', element: <Contact /> },
     ],
   },
   { path: '/login', element: <Login /> },

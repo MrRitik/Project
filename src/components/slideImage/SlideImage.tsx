@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { IconButton, Box, Stack } from '@mui/material';
 export interface SlideImageProps {
@@ -27,17 +27,18 @@ export const SlideImage = ({
   dotSize = 'medium',
 }: SlideImageProps) => {
   const [imageIndex, setImageIndex] = useState(0);
-  const showNextImage = () => {
+  // Memoize the showNextImage function with useCallback
+  const showNextImage = useCallback(() => {
     setImageIndex(index => (index === images.length - 1 ? 0 : index + 1));
-  };
-  const showPrevImage = () => {
+  }, [images.length]);
+  const showPrevImage = useCallback(() => {
     setImageIndex(index => (index === 0 ? images.length - 1 : index - 1));
-  };
+  }, [images.length]);
   useEffect(() => {
     if (!autoPlay) return;
     const timer = setTimeout(showNextImage, interval);
     return () => clearTimeout(timer);
-  }, [imageIndex, autoPlay, interval]);
+  }, [imageIndex, autoPlay, interval, showNextImage]); // Now includes showNextImage
   const dotSizes = {
     small: 6,
     medium: 8,
@@ -122,6 +123,7 @@ export const SlideImage = ({
             position: 'absolute',
             bottom: 10,
             left: '50%',
+            transform: 'translateX(-50%)',
           }}
         >
           {images.map((_, index) => (
@@ -134,6 +136,7 @@ export const SlideImage = ({
                 borderRadius: '50%',
                 bgcolor: imageIndex === index ? 'primary.main' : 'grey.500',
                 cursor: 'pointer',
+                transition: 'background-color 0.3s ease',
               }}
               aria-label={`View Image ${index + 1}`}
             />

@@ -7,6 +7,7 @@ export const NavBar = () => {
   const navItems = [
     { text: 'Home', path: '/' },
     { text: 'About', path: '/about' },
+    { text: 'Contact Us', path: '/contact' },
   ];
   if (isAuthenticated) {
     navItems.push({ text: 'Dashboard', path: '/dashboard' });
