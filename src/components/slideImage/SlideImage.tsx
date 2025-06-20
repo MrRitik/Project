@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import { IconButton, Box, Stack } from '@mui/material';
+import { SLIDER_CONFIG } from '@/common';
 export interface SlideImageProps {
   images: {
     url: string;
@@ -17,14 +18,14 @@ export interface SlideImageProps {
 }
 export const SlideImage = ({
   images,
-  width = '100%',
-  height = '100%',
-  autoPlay = false,
-  interval = 3000,
-  showDots = true,
-  showArrows = true,
-  arrowSize = 'medium',
-  dotSize = 'medium',
+  width = SLIDER_CONFIG.DEFAULT.WIDTH,
+  height = SLIDER_CONFIG.DEFAULT.HEIGHT,
+  autoPlay = SLIDER_CONFIG.DEFAULT.AUTO_PLAY,
+  interval = SLIDER_CONFIG.DEFAULT.INTERVAL,
+  showDots = SLIDER_CONFIG.DEFAULT.SHOW_DOTS,
+  showArrows = SLIDER_CONFIG.DEFAULT.SHOW_ARROWS,
+  arrowSize = SLIDER_CONFIG.DEFAULT.ARROW_SIZE,
+  dotSize = SLIDER_CONFIG.DEFAULT.DOT_SIZE,
 }: SlideImageProps) => {
   const [imageIndex, setImageIndex] = useState(0);
   // Memoize the showNextImage function with useCallback
@@ -39,11 +40,6 @@ export const SlideImage = ({
     const timer = setTimeout(showNextImage, interval);
     return () => clearTimeout(timer);
   }, [imageIndex, autoPlay, interval, showNextImage]); // Now includes showNextImage
-  const dotSizes = {
-    small: 6,
-    medium: 8,
-    large: 10,
-  };
   return (
     <Box
       aria-label="Image Slider"
@@ -131,8 +127,8 @@ export const SlideImage = ({
               key={index}
               onClick={() => setImageIndex(index)}
               sx={{
-                width: dotSizes[dotSize],
-                height: dotSizes[dotSize],
+                width: SLIDER_CONFIG.DOT_SIZES[dotSize],
+                height: SLIDER_CONFIG.DOT_SIZES[dotSize],
                 borderRadius: '50%',
                 bgcolor: imageIndex === index ? 'primary.main' : 'grey.500',
                 cursor: 'pointer',
