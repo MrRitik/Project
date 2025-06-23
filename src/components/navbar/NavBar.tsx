@@ -1,8 +1,10 @@
-import { AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
+import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-import styles from '@/CSS/Nav.module.css';
+import { StyledAppBar, StyledToolbar, StyledLogoLink, Links } from './styled';
+
 const isAuthenticated = true;
 const userRole = 'admin';
+
 export const NavBar = () => {
   const navItems = [
     { text: 'Home', path: '/' },
@@ -16,13 +18,11 @@ export const NavBar = () => {
     navItems.push({ text: 'Profile', path: '/profile' });
   }
   return (
-    <AppBar position="static" className={styles.appBar}>
-      <Toolbar className={styles.toolbar}>
-        <Typography variant="h6" component={Link} to="/" className={styles.logo}>
-          MyLogo
-        </Typography>
-        <Box sx={{ flexGrow: 1 }} />
-        <Box className={styles.links}>
+    <StyledAppBar position="static">
+      <StyledToolbar>
+        <StyledLogoLink to="/">MyLogo</StyledLogoLink>
+        <div style={{ flexGrow: 1 }} />
+        <Links>
           {navItems.map(item => (
             <Button key={item.text} component={Link} to={item.path} color="inherit">
               {item.text}
@@ -31,8 +31,8 @@ export const NavBar = () => {
           <Button component={Link} to={isAuthenticated ? '/login' : '/login'} color="inherit">
             {isAuthenticated ? 'Logout' : 'Login'}
           </Button>
-        </Box>
-      </Toolbar>
-    </AppBar>
+        </Links>
+      </StyledToolbar>
+    </StyledAppBar>
   );
 };

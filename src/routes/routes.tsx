@@ -1,50 +1,62 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '../App';
-import { Profile } from '@/pages/profile';
-import { Login } from '@/pages/login';
-import { Home } from '@/pages/home';
-import { Dashboard } from '@/pages/dashboard';
-import { About } from '@/pages/about';
+import { MainLayout, DashboardLayout } from '@/layouts';
 import ProtectedRoute from './ProtectedRoute';
 import PrivateRoute from './PrivateRoute';
-import { Unauth } from '@/pages/Unauth';
-import { Contact } from '@/pages/contact';
+import { About, Contact, Dashboard, Home, Login, Profile, Unauth, NotFound } from '@/pages';
+
 const isAuthenticated = true;
 const userRole = 'admin';
+
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
-      { index: true, element: <Home /> },
-      { path: 'about', element: <About /> },
       {
-        path: 'profile',
-        element: (
-          <ProtectedRoute
-            isAuthenticated={isAuthenticated}
-            userRole={userRole}
-            allowedRoles={['admin']}
-          >
-            <Profile />
-          </ProtectedRoute>
-        ),
+        path: '/',
+        element: <MainLayout />,
+        children: [
+          { index: true, element: <Home /> },
+          { path: 'about', element: <About /> },
+          { path: 'contact', element: <Contact /> },
+        ],
       },
       {
         path: '/dashboard',
         element: (
           <PrivateRoute isAuthenticated={isAuthenticated}>
-            <Dashboard />
+            <DashboardLayout />
           </PrivateRoute>
         ),
+        children: [
+          { index: true, element: <Dashboard /> },
+          {
+            path: 'profile',
+            element: (
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                userRole={userRole}
+                allowedRoles={['admin']}
+              >
+                <Profile />
+              </ProtectedRoute>
+            ),
+          },
+        ],
       },
-      { path: 'contact', element: <Contact /> },
     ],
   },
   { path: '/login', element: <Login /> },
+  { path: '/profile', element: <Profile /> },
   {
     path: '/unauthorized',
     element: <Unauth />,
   },
+  {
+    path: '*',
+    element: <NotFound />,
+  },
 ]);
+
 export default router;

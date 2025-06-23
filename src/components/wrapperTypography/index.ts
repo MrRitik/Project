@@ -1,0 +1,1 @@
+export { WrappedTypography } from './WrapperTypography';

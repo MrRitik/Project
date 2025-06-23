@@ -28,7 +28,7 @@ export default tseslint.config(
       'no-multiple-empty-lines': [
         'warn',
         {
-          max: 0,
+          max: 1,
           maxEOF: 0,
           maxBOF: 0,
         },
@@ -41,11 +41,15 @@ export default tseslint.config(
         },
       ],
       'react/jsx-no-useless-fragment': 'warn',
-      "@typescript-eslint/no-duplicate-enum-values": "error",
+      '@typescript-eslint/no-duplicate-enum-values': 'error',
       'no-console': 'warn',
       'no-unused-vars': 'off',
       'no-debugger': 'warn',
       eqeqeq: ['error', 'always'],
+      'padding-line-between-statements': [
+        'warn',
+        { blankLine: 'always', prev: 'import', next: 'export' },
+      ],
     },
   },
 );

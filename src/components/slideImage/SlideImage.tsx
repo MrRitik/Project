@@ -1,7 +1,15 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from '@mui/icons-material';
-import { IconButton, Box, Stack } from '@mui/material';
 import { SLIDER_CONFIG } from '@/common';
+import {
+  SliderContainer,
+  ImageWrapper,
+  SlideImageBox,
+  ArrowButton,
+  DotContainer,
+  Dot,
+} from './styles';
+
 export interface SlideImageProps {
   images: {
     url: string;
@@ -16,6 +24,7 @@ export interface SlideImageProps {
   arrowSize?: 'small' | 'medium' | 'large';
   dotSize?: 'small' | 'medium' | 'large';
 }
+
 export const SlideImage = ({
   images,
   width = SLIDER_CONFIG.DEFAULT.WIDTH,
@@ -28,117 +37,68 @@ export const SlideImage = ({
   dotSize = SLIDER_CONFIG.DEFAULT.DOT_SIZE,
 }: SlideImageProps) => {
   const [imageIndex, setImageIndex] = useState(0);
-  // Memoize the showNextImage function with useCallback
+
   const showNextImage = useCallback(() => {
     setImageIndex(index => (index === images.length - 1 ? 0 : index + 1));
   }, [images.length]);
+
   const showPrevImage = useCallback(() => {
     setImageIndex(index => (index === 0 ? images.length - 1 : index - 1));
   }, [images.length]);
+
   useEffect(() => {
     if (!autoPlay) return;
     const timer = setTimeout(showNextImage, interval);
     return () => clearTimeout(timer);
-  }, [imageIndex, autoPlay, interval, showNextImage]); // Now includes showNextImage
+  }, [imageIndex, autoPlay, interval, showNextImage]);
+
   return (
-    <Box
-      aria-label="Image Slider"
-      sx={{
-        width,
-        height,
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      <Box
-        sx={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          transition: 'transform 0.5s ease',
-          transform: `translateX(-${imageIndex * 100}%)`,
-        }}
-      >
+    <SliderContainer width={width} height={height} aria-label="Image Slider">
+      <ImageWrapper offset={imageIndex * 100}>
         {images.map(({ url, alt }, index) => (
-          <Box
+          <SlideImageBox
             key={`${url}-${index}`}
-            component="img"
             src={url}
             alt={alt}
             aria-hidden={imageIndex !== index}
-            sx={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              flexShrink: 0,
-            }}
           />
         ))}
-      </Box>
+      </ImageWrapper>
+
       {showArrows && images.length > 1 && (
         <>
-          <IconButton
+          <ArrowButton
             onClick={showPrevImage}
-            sx={{
-              position: 'absolute',
-              left: 16,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              color: 'white',
-              bgcolor: 'rgba(0,0,0,0.5)',
-              '&:hover': { bgcolor: 'rgba(0,0,0,0.7)' },
-            }}
             aria-label="View Previous Image"
             size={arrowSize}
+            sx={{ left: 16 }}
           >
             <ChevronLeft fontSize={arrowSize} />
-          </IconButton>
-          <IconButton
+          </ArrowButton>
+          <ArrowButton
             onClick={showNextImage}
-            sx={{
-              position: 'absolute',
-              right: 16,
-              top: '50%',
-              transform: 'translateY(-50%)',
-              color: 'white',
-              bgcolor: 'rgba(0,0,0,0.5)',
-              '&:hover': { bgcolor: 'rgba(0,0,0,0.7)' },
-            }}
             aria-label="View Next Image"
             size={arrowSize}
+            sx={{ right: 16 }}
           >
             <ChevronRight fontSize={arrowSize} />
-          </IconButton>
+          </ArrowButton>
         </>
       )}
+
       {showDots && images.length > 1 && (
-        <Stack
-          direction="row"
-          spacing={1}
-          sx={{
-            position: 'absolute',
-            bottom: 10,
-            left: '50%',
-            transform: 'translateX(-50%)',
-          }}
-        >
+        <DotContainer direction="row" spacing={1}>
           {images.map((_, index) => (
-            <Box
+            <Dot
               key={index}
+              active={imageIndex === index}
+              size={SLIDER_CONFIG.DOT_SIZES[dotSize]}
               onClick={() => setImageIndex(index)}
-              sx={{
-                width: SLIDER_CONFIG.DOT_SIZES[dotSize],
-                height: SLIDER_CONFIG.DOT_SIZES[dotSize],
-                borderRadius: '50%',
-                bgcolor: imageIndex === index ? 'primary.main' : 'grey.500',
-                cursor: 'pointer',
-                transition: 'background-color 0.3s ease',
-              }}
               aria-label={`View Image ${index + 1}`}
             />
           ))}
-        </Stack>
+        </DotContainer>
       )}
-    </Box>
+    </SliderContainer>
   );
 };

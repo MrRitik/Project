@@ -1,4 +1,13 @@
-import styles from '@/CSS/Banner.module.css';
+import {
+  StyledBannerContainer,
+  StyledBackground,
+  StyledOverlay,
+  StyledContent,
+  StyledTitle,
+  StyledSubtitle,
+  StyledBannerButton,
+} from './styled';
+
 interface BannerProps {
   imageUrl: string;
   title: string;
@@ -7,11 +16,11 @@ interface BannerProps {
   onClick?: () => void;
   textAlign?: 'left' | 'center' | 'right';
   textColor?: string;
-  overlayColor?: string; // New prop for overlay color customization
+  overlayColor?: string;
   overlayOpacity?: number;
   height?: string;
   minHeight?: string;
-  className?: string; // Allow additional className
+  className?: string;
 }
 export const Banner = ({
   imageUrl,
@@ -40,18 +49,18 @@ export const Banner = ({
     minHeight,
   };
   return (
-    <div className={`${styles.container} ${className}`} style={containerStyle}>
-      <div className={styles.background} style={{ backgroundImage: `url(${imageUrl})` }} />
-      <div className={styles.overlay} style={overlayStyle} />
-      <div className={styles.content} style={contentStyle}>
-        <h2 className={styles.title}>{title}</h2>
-        {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+    <StyledBannerContainer style={containerStyle} className={className}>
+      <StyledBackground style={{ backgroundImage: `url(${imageUrl})` }} />
+      <StyledOverlay style={overlayStyle} />
+      <StyledContent style={contentStyle}>
+        <StyledTitle>{title}</StyledTitle>
+        {subtitle && <StyledSubtitle>{subtitle}</StyledSubtitle>}
         {ctaText && (
-          <button type="submit" className={styles.button} onClick={onClick}>
+          <StyledBannerButton type="submit" onClick={onClick}>
             {ctaText}
-          </button>
+          </StyledBannerButton>
         )}
-      </div>
-    </div>
+      </StyledContent>
+    </StyledBannerContainer>
   );
 };

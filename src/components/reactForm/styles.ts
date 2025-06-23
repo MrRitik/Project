@@ -1,40 +1,19 @@
-export const formStyles = {
+import type { SxProps, Theme } from '@mui/material';
+
+export const formStyles: Record<string, SxProps<Theme>> = {
   container: {
-    maxWidth: '400px',
-    margin: '2rem auto',
-    padding: '2rem',
-    border: '1px solid #ddd',
-    borderRadius: '8px',
-    backgroundColor: '#fafafa',
-  },
-  fieldWrapper: {
-    marginBottom: '1.5rem',
-  },
-  label: {
-    display: 'block',
-    marginBottom: '0.5rem',
-    fontWeight: 600,
-  },
-  input: {
-    width: '100%',
-    padding: '0.5rem',
-    fontSize: '1rem',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
-  },
-  errorText: {
-    color: 'red',
-    fontSize: '0.875rem',
-    marginTop: '0.25rem',
+    maxWidth: '420px',
+    mx: 'auto',
+    my: 6,
+    p: 4,
+    border: '1px solid #e0e0e0',
+    borderRadius: 2,
+    backgroundColor: '#fff',
+    boxShadow: 2,
   },
   submitButton: {
-    padding: '0.75rem 1.5rem',
-    fontSize: '1rem',
-    backgroundColor: '#4a90e2',
-    color: 'white',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    marginTop: '0.25rem',
+    mt: 2,
+    py: 1.5,
+    fontWeight: 600,
   },
 };

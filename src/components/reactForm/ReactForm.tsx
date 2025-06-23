@@ -1,16 +1,19 @@
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { formStyles } from './styles';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
 import { useEffect } from 'react';
-import { setFormData } from '@/slices/formSlice';
+import { setFormData } from '@/redux/slices/formSlice';
+import { Box, TextField, Button, Stack } from '@mui/material';
+import { formStyles } from './styles';
+
 type FormValues = {
   name: string;
   email: string;
   age: number;
 };
+
 const schema = yup
   .object({
     name: yup.string().required('Name is required'),
@@ -23,9 +26,11 @@ const schema = yup
       .required('Age is required'),
   })
   .required();
+
 export const ReactForm = () => {
   const dispatch = useDispatch();
   const savedData = useSelector((state: RootState) => state.form);
+
   const {
     register,
     handleSubmit,
@@ -35,41 +40,51 @@ export const ReactForm = () => {
     resolver: yupResolver(schema),
     defaultValues: savedData,
   });
-  // Automatically fill form with saved data
+
   useEffect(() => {
     reset(savedData);
   }, [savedData, reset]);
+
   const onSubmit = (data: FormValues) => {
     dispatch(setFormData(data));
-    alert("Form is submitted")
-    // console.log('Form submitted:', data);
+    alert('Form is submitted');
   };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} style={formStyles.container}>
-      <div style={formStyles.fieldWrapper}>
-        <label htmlFor="name" style={formStyles.label}>
-          Name:
-        </label>
-        <input id="name" {...register('name')} style={formStyles.input} />
-        {errors.name && <p style={formStyles.errorText}>{errors.name.message}</p>}
-      </div>
-      <div style={formStyles.fieldWrapper}>
-        <label htmlFor="email" style={formStyles.label}>
-          Email:
-        </label>
-        <input id="email" {...register('email')} style={formStyles.input} />
-        {errors.email && <p style={formStyles.errorText}>{errors.email.message}</p>}
-      </div>
-      <div style={formStyles.fieldWrapper}>
-        <label htmlFor="age" style={formStyles.label}>
-          Age:
-        </label>
-        <input id="age" type="number" {...register('age')} style={formStyles.input} />
-        {errors.age && <p style={formStyles.errorText}>{errors.age.message}</p>}
-      </div>
-      <button type="submit" style={formStyles.submitButton}>
-        Submit
-      </button>
-    </form>
+    <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={formStyles.container}>
+      <Stack spacing={3}>
+        <TextField
+          label="Name"
+          variant="outlined"
+          fullWidth
+          {...register('name')}
+          error={!!errors.name}
+          helperText={errors.name?.message}
+        />
+
+        <TextField
+          label="Email"
+          variant="outlined"
+          fullWidth
+          {...register('email')}
+          error={!!errors.email}
+          helperText={errors.email?.message}
+        />
+
+        <TextField
+          label="Age"
+          variant="outlined"
+          type="number"
+          fullWidth
+          {...register('age')}
+          error={!!errors.age}
+          helperText={errors.age?.message}
+        />
+
+        <Button type="submit" variant="contained" sx={formStyles.submitButton}>
+          Submit
+        </Button>
+      </Stack>
+    </Box>
   );
 };
