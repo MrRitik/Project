@@ -5,20 +5,23 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import prettier from 'eslint-config-prettier';
+import tsPlugin from '@typescript-eslint/eslint-plugin';
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', '**/node_modules/**'] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended, prettier],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
+      parser: tseslint.parser, // ✅ tell ESLint to use the TypeScript parser
       ecmaVersion: 2020,
+      sourceType: 'module',
       globals: globals.browser,
     },
     plugins: {
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      '@typescript-eslint': tsPlugin,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -51,5 +54,15 @@ export default tseslint.config(
         { blankLine: 'always', prev: 'import', next: 'export' },
       ],
     },
+    settings: {
+      react: {
+        version: 'detect', // ✅ ensures React plugin detects correct version
+      },
+    },
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      prettier, // disables formatting rules that conflict with Prettier
+    ],
   },
 );
