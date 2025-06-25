@@ -3,7 +3,8 @@ import App from '../App';
 import { MainLayout, DashboardLayout } from '@/layouts';
 import ProtectedRoute from './ProtectedRoute';
 import PrivateRoute from './PrivateRoute';
-import { About, Contact, Dashboard, Home, Login, Profile, Unauth, NotFound } from '@/pages';
+import { About, Contact, Home, Login, Unauth, NotFound } from '@/pages';
+import { Employees, Profile } from '@/components';
 
 const isAuthenticated = true;
 const userRole = 'admin';
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         children: [
-          { index: true, element: <Dashboard /> },
+          { index: true, element: <Profile /> },
           {
             path: 'profile',
             element: (
@@ -43,12 +44,24 @@ const router = createBrowserRouter([
               </ProtectedRoute>
             ),
           },
+          {
+            path: 'employees',
+            element: (
+              <ProtectedRoute
+                isAuthenticated={isAuthenticated}
+                userRole={userRole}
+                allowedRoles={['admin']}
+              >
+                <Employees />
+              </ProtectedRoute>
+            ),
+          },
         ],
       },
     ],
   },
   { path: '/login', element: <Login /> },
-  { path: '/profile', element: <Profile /> },
+
   {
     path: '/unauthorized',
     element: <Unauth />,

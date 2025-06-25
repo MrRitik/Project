@@ -5,5 +5,7 @@ import { NavBar } from './navbar';
 import { ReactForm } from './reactForm';
 import { SlideImage } from './slideImage';
 import { WrappedTypography } from './wrapperTypography';
+import { Employees } from './employees';
+import { Profile } from './profile';
 
-export { Banner, CustomSelect, Footer, NavBar, ReactForm, SlideImage, WrappedTypography };
+export { Banner, CustomSelect, Footer, NavBar, ReactForm, SlideImage, WrappedTypography, Employees, Profile };
