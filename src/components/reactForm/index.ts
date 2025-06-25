@@ -1,1 +1,1 @@
-export {ReactForm} from './ReactForm'
+export { ReactForm } from './ReactForm';

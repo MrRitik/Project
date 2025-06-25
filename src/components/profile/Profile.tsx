@@ -10,8 +10,21 @@ import {
   editButton,
 } from './styles';
 import { img1 } from '@/assets/images';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProfile } from '@/redux/slices/profileSlice';
+import type { RootState } from '@/redux/store';
+import { EditProfileModal } from '../EditProfileModal';
 
 export const Profile = () => {
+  const dispatch = useDispatch();
+  const profileData = useSelector((state: RootState) => state.profile);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const handleSave = (updatedData: typeof profileData) => {
+    dispatch(updateProfile(updatedData));
+  };
+
   return (
     <Box sx={profileContainer}>
       <Typography variant="h5" pb={3} pl={1}>
@@ -22,14 +35,19 @@ export const Profile = () => {
         <Avatar src={img1} alt="Profile Picture" sx={{ width: 80, height: 80 }} />
         <Box ml={2}>
           <Typography variant="h5" fontWeight={600}>
-            Vishal Singh
+            {profileData.firstName} {profileData.lastName}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            UX/UI Developer
+            {profileData.bio}
           </Typography>
         </Box>
         <Box ml="auto">
-          <Button variant="outlined" endIcon={<EditIcon />} sx={editButton}>
+          <Button
+            variant="outlined"
+            endIcon={<EditIcon />}
+            sx={editButton}
+            onClick={() => setIsEditModalOpen(true)}
+          >
             Edit
           </Button>
         </Box>
@@ -37,71 +55,65 @@ export const Profile = () => {
 
       <Box sx={profileInfoCard}>
         <Typography sx={sectionHeader}>Personal Information</Typography>
-
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-          {/* Left Column */}
           <Box sx={{ flex: 1, minWidth: 250 }}>
             <Box sx={{ mb: 3 }}>
               <Typography sx={labelText}>First Name</Typography>
-              <Typography sx={valueText}>Vishal</Typography>
+              <Typography sx={valueText}>{profileData.firstName}</Typography>
             </Box>
-
             <Box sx={{ mb: 3 }}>
               <Typography sx={labelText}>Email Address</Typography>
-              <Typography sx={valueText}>vishal.singh@aithinkers.com</Typography>
+              <Typography sx={valueText}>{profileData.email}</Typography>
             </Box>
-
             <Box sx={{ mb: 3 }}>
               <Typography sx={labelText}>Bio</Typography>
-              <Typography sx={valueText}>UX/UI Developer</Typography>
+              <Typography sx={valueText}>{profileData.bio}</Typography>
             </Box>
           </Box>
-
-          {/* Right Column */}
           <Box sx={{ flex: 1, minWidth: 250 }}>
             <Box sx={{ mb: 3 }}>
               <Typography sx={labelText}>Last Name</Typography>
-              <Typography sx={valueText}>Singh</Typography>
+              <Typography sx={valueText}>{profileData.lastName}</Typography>
             </Box>
-
             <Box sx={{ mb: 3 }}>
               <Typography sx={labelText}>Phone</Typography>
-              <Typography sx={valueText}>9030973722</Typography>
+              <Typography sx={valueText}>{profileData.phone}</Typography>
             </Box>
-
             <Box sx={{ mb: 3 }}>
               <Typography sx={labelText}>Date of Joining</Typography>
-              <Typography sx={valueText}>01/05/2018</Typography>
+              <Typography sx={valueText}>{profileData.dateOfJoining}</Typography>
             </Box>
           </Box>
         </Box>
       </Box>
 
       <Box sx={profileInfoCard}>
-        <Typography sx={sectionHeader}>Address </Typography>
-
+        <Typography sx={sectionHeader}>Address</Typography>
         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-          {/* Left Column */}
           <Box sx={{ flex: 1, minWidth: 250 }}>
             <Box sx={{ mb: 3 }}>
               <Typography sx={labelText}>Country</Typography>
-              <Typography sx={valueText}>India</Typography>
+              <Typography sx={valueText}>{profileData.country}</Typography>
             </Box>
-
             <Box sx={{ mb: 3 }}>
               <Typography sx={labelText}>Postal Code</Typography>
-              <Typography sx={valueText}>500030</Typography>
+              <Typography sx={valueText}>{profileData.zipCode}</Typography>
             </Box>
           </Box>
-
           <Box sx={{ flex: 1, minWidth: 250 }}>
             <Box sx={{ mb: 3 }}>
-              <Typography sx={labelText}>city/State</Typography>
-              <Typography sx={valueText}>Hyderabad, Telangana</Typography>
+              <Typography sx={labelText}>City/State</Typography>
+              <Typography sx={valueText}>{profileData.cityState}</Typography>
             </Box>
           </Box>
         </Box>
       </Box>
+      <EditProfileModal
+        open={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        onSave={handleSave}
+        initialData={profileData}
+      />
     </Box>
   );
 };
