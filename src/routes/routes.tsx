@@ -4,7 +4,7 @@ import { MainLayout, DashboardLayout } from '@/layouts';
 import ProtectedRoute from './ProtectedRoute';
 import PrivateRoute from './PrivateRoute';
 import { About, Contact, Home, Login, Unauth, NotFound } from '@/pages';
-import { Employees, Profile } from '@/components';
+import { Dashboard, Employees, Profile } from '@/components';
 
 const isAuthenticated = true;
 const userRole = 'admin';
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         children: [
-          { index: true, element: <Profile /> },
+          { index: true, element: <Dashboard /> },
           {
             path: 'profile',
             element: (

@@ -1,12 +1,5 @@
-import {
-  StyledBannerContainer,
-  StyledBackground,
-  StyledOverlay,
-  StyledContent,
-  StyledTitle,
-  StyledSubtitle,
-  StyledBannerButton,
-} from './styled';
+import { Box, Typography, Button } from '@mui/material';
+import { bannerContainer, background, overlay, content, title, button } from './styles';
 
 interface BannerProps {
   imageUrl: string;
@@ -22,9 +15,10 @@ interface BannerProps {
   minHeight?: string;
   className?: string;
 }
+
 export const Banner = ({
   imageUrl,
-  title,
+  title: heading,
   subtitle,
   ctaText,
   onClick,
@@ -36,31 +30,19 @@ export const Banner = ({
   minHeight = '300px',
   className = '',
 }: BannerProps) => {
-  const overlayStyle = {
-    backgroundColor: overlayColor,
-    opacity: overlayOpacity,
-  };
-  const contentStyle = {
-    color: textColor,
-    textAlign,
-  };
-  const containerStyle = {
-    height,
-    minHeight,
-  };
   return (
-    <StyledBannerContainer style={containerStyle} className={className}>
-      <StyledBackground style={{ backgroundImage: `url(${imageUrl})` }} />
-      <StyledOverlay style={overlayStyle} />
-      <StyledContent style={contentStyle}>
-        <StyledTitle>{title}</StyledTitle>
-        {subtitle && <StyledSubtitle>{subtitle}</StyledSubtitle>}
+    <Box sx={bannerContainer(height, minHeight)} className={className}>
+      <Box sx={{ ...background, backgroundImage: `url(${imageUrl})` }} />
+      <Box sx={overlay(overlayColor, overlayOpacity)} />
+      <Box sx={content(textAlign, textColor)}>
+        <Typography sx={title}>{heading}</Typography>
+        {subtitle && <Typography>{subtitle}</Typography>}
         {ctaText && (
-          <StyledBannerButton type="submit" onClick={onClick}>
+          <Button type="button" onClick={onClick} sx={button}>
             {ctaText}
-          </StyledBannerButton>
+          </Button>
         )}
-      </StyledContent>
-    </StyledBannerContainer>
+      </Box>
+    </Box>
   );
 };

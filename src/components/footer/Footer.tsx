@@ -1,13 +1,14 @@
-import { FooterBox, FooterContainer, FooterText } from './styled';
+import { Box, Container, Typography } from '@mui/material';
+import { footerBox, footerContainer, footerText } from './styles';
 
 export const Footer = () => {
   return (
-    <FooterBox component="footer">
-      <FooterContainer maxWidth="lg">
-        <FooterText variant="body2">
+    <Box component="footer" sx={footerBox}>
+      <Container maxWidth="lg" sx={footerContainer}>
+        <Typography variant="body2" sx={footerText}>
           © {new Date().getFullYear()} Ritik. All rights reserved.
-        </FooterText>
-      </FooterContainer>
-    </FooterBox>
+        </Typography>
+      </Container>
+    </Box>
   );
 };

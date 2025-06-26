@@ -1,16 +1,14 @@
-import { AppBar, Toolbar, Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import type { SxProps, Theme } from '@mui/material/styles';
 
-export const StyledAppBar = styled(AppBar)(({ theme }) => ({
+export const appBar: SxProps<Theme> = theme => ({
   backgroundColor: theme.palette.primary.main,
   boxShadow: theme.shadows[2],
   position: 'sticky',
   top: 0,
   zIndex: theme.zIndex.appBar,
-}));
+});
 
-export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
+export const toolbar: SxProps<Theme> = theme => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
@@ -20,9 +18,9 @@ export const StyledToolbar = styled(Toolbar)(({ theme }) => ({
     padding: `${theme.spacing(1)} ${theme.spacing(1)}`,
     minHeight: '56px',
   },
-}));
+});
 
-export const StyledLogoLink = styled(Link)(({ theme }) => ({
+export const logoLink: SxProps<Theme> = theme => ({
   color: theme.palette.primary.contrastText,
   textDecoration: 'none',
   fontWeight: theme.typography.fontWeightBold,
@@ -34,9 +32,9 @@ export const StyledLogoLink = styled(Link)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     fontSize: theme.typography.h6.fontSize,
   },
-}));
+});
 
-export const Links = styled(Box)(({ theme }) => ({
+export const linksContainer: SxProps<Theme> = theme => ({
   display: 'flex',
   alignItems: 'center',
   gap: theme.spacing(1),
@@ -69,4 +67,4 @@ export const Links = styled(Box)(({ theme }) => ({
       padding: `${theme.spacing(0.5)} ${theme.spacing(1)}`,
     },
   },
-}));
+});

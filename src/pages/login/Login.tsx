@@ -1,7 +1,7 @@
 import { Box, Paper, Typography, TextField, Button, Container, Link } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginStyles } from './styles';
+import { wrapper, paper, form, submitButton, linkBox } from './styles';
 
 export const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
@@ -13,18 +13,17 @@ export const Login = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // console.log('Login attempt:', formData);
     navigate('/dashboard');
   };
 
   return (
     <Container component="main" maxWidth="xs">
-      <Box sx={loginStyles.wrapper}>
-        <Paper elevation={3} sx={loginStyles.paper}>
+      <Box sx={wrapper}>
+        <Paper elevation={3} sx={paper}>
           <Typography component="h1" variant="h5" align="center" gutterBottom>
             Sign In
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} sx={loginStyles.form}>
+          <Box component="form" onSubmit={handleSubmit} sx={form}>
             <TextField
               margin="normal"
               required
@@ -49,10 +48,10 @@ export const Login = () => {
               value={formData.password}
               onChange={e => handleInputChange('password', e.target.value)}
             />
-            <Button type="submit" fullWidth variant="contained" sx={loginStyles.submitButton}>
+            <Button type="submit" fullWidth variant="contained" sx={submitButton}>
               Sign In
             </Button>
-            <Box sx={loginStyles.linkBox}>
+            <Box sx={linkBox}>
               <Link href="/" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>

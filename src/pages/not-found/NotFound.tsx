@@ -1,11 +1,16 @@
 import React from 'react';
-import { NotFoundWrapper, NotFoundTitle, NotFoundText } from './styles';
+import { Box, Typography } from '@mui/material';
+import { notFoundWrapper, notFoundTitle, notFoundText } from './styles';
 
 const NotFound: React.FC = () => (
-  <NotFoundWrapper>
-    <NotFoundTitle variant="h1">404</NotFoundTitle>
-    <NotFoundText variant="body1">Page Not Found</NotFoundText>
-  </NotFoundWrapper>
+  <Box sx={notFoundWrapper}>
+    <Typography variant="h1" sx={notFoundTitle}>
+      404
+    </Typography>
+    <Typography variant="body1" sx={notFoundText}>
+      Page Not Found
+    </Typography>
+  </Box>
 );
 
 export default NotFound;

@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { FormTextField } from '../FormTextField';
+import { CITY_STATE_OPTION } from '@/common';
 
 const profileSchema = yup.object().shape({
   firstName: yup.string().required('First name is required'),
@@ -68,14 +69,6 @@ export const EditProfileModal = ({ open, onClose, onSave, initialData }: EditPro
     reset();
     onClose();
   };
-
-  const cityStateOptions = [
-    { value: 'Hyderabad, Telangana', label: 'Hyderabad, Telangana' },
-    { value: 'Bangalore, Karnataka', label: 'Bangalore, Karnataka' },
-    { value: 'Mumbai, Maharashtra', label: 'Mumbai, Maharashtra' },
-    { value: 'Delhi, NCR', label: 'Delhi, NCR' },
-    { value: 'Chennai, Tamil Nadu', label: 'Chennai, Tamil Nadu' },
-  ];
 
   return (
     <Dialog
@@ -134,7 +127,7 @@ export const EditProfileModal = ({ open, onClose, onSave, initialData }: EditPro
                     error={!!error}
                     helperText={error?.message}
                   >
-                    {cityStateOptions.map(option => (
+                    {CITY_STATE_OPTION.map(option => (
                       <MenuItem key={option.value} value={option.value}>
                         {option.label}
                       </MenuItem>

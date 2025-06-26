@@ -1,22 +1,21 @@
-import { styled } from '@mui/material/styles';
-import { Box, Typography } from '@mui/material';
+import type { SxProps, Theme } from '@mui/material/styles';
 
-export const NotFoundWrapper = styled(Box)(() => ({
+export const notFoundWrapper: SxProps<Theme> = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
   height: '80vh',
-}));
+};
 
-export const NotFoundTitle = styled(Typography)(({ theme }) => ({
+export const notFoundTitle: SxProps<Theme> = theme => ({
   fontSize: '6rem',
   color: '#ff4d4f',
   marginBottom: theme.spacing(2),
   fontWeight: 700,
-}));
+});
 
-export const NotFoundText = styled(Typography)(() => ({
+export const notFoundText: SxProps<Theme> = {
   fontSize: '2rem',
   color: '#333',
-}));
+};

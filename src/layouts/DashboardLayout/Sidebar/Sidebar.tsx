@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Drawer, List, ListItem, Toolbar, Typography } from '@mui/material';
+import { Drawer, List, ListItem, Toolbar } from '@mui/material';
 import {
-  Dashboard as DashboardIcon,
   Person as ProfileIcon,
-  Group as EmployeesIcon,
   Logout as LogoutIcon,
 } from '@mui/icons-material';
+import HouseIcon from '@mui/icons-material/House';
+import GroupsIcon from '@mui/icons-material/Groups';
 import {
   DrawerStyles,
   LogoWrapper,
@@ -23,19 +23,21 @@ interface SidebarProps {
   drawerWidth: number;
   collapsedWidth: number;
 }
+
 const menuItems = [
+  { text: 'Dashboard', icon: <HouseIcon />, path: '/dashboard' },
   { text: 'Profile', icon: <ProfileIcon />, path: '/dashboard/profile' },
-  { text: 'Employees', icon: <EmployeesIcon />, path: '/dashboard/employees' },
+  { text: 'Employees', icon: <GroupsIcon />, path: '/dashboard/employees' },
 ];
 
 export const Sidebar: React.FC<SidebarProps> = ({ open, drawerWidth, collapsedWidth }) => {
-  const [active, setActive] = useState('Profile');
+  const [activePath, setActivePath] = useState('/dashboard');
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    const activeItem = menuItems.find(item => location.pathname.includes(item.path));
-    if (activeItem) setActive(activeItem.text);
+    const activeItem = menuItems.find(item => location.pathname === item.path);
+    if (activeItem) setActivePath(activeItem.path);
   }, [location.pathname]);
 
   return (
@@ -50,54 +52,43 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, drawerWidth, collapsedWi
         </LogoWrapper>
       </Toolbar>
 
-      <List sx={{ flexGrow: 1 }}>
-        {/* Static Dashboard item */}
-        <ListItem disablePadding sx={{ px: 3, py: 2 }}>
-          <Box display="flex" alignItems="center" gap={1}>
-            <DashboardIcon fontSize="small" sx={{ color: '#808080' }} />
-            {open && (
-              <Typography variant="body2" sx={{ color: '#808080', fontWeight: 500 }}>
-                Dashboard
-              </Typography>
-            )}
-          </Box>
-        </ListItem>
+      <List sx={{ flexGrow: 1, mt:3 }}>
+        {menuItems.map(({ text, icon, path }) => (
+          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+            <ListItemBtn
+              open={open}
+              active={activePath === path}
+              onClick={() => {
+                setActivePath(path);
+                navigate(path);
+              }}
+            >
+              <ListIcon open={open} sx={{ color: activePath === path ? '#2196f3' : '#808080' }}>
+                {icon}
+              </ListIcon>
 
-        {/* Menu Items */}
-        <List sx={{ flexGrow: 1 }}>
-          {menuItems.map(({ text, icon, path }) => (
-            <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-              <ListItemBtn
+              <ListText
                 open={open}
-                active={active === text}
-                onClick={() => {
-                  setActive(text);
-                  navigate(path);
-                }}
-              >
-                <ListIcon open={open} sx={{ color: active === text ? '#2196f3' : '#808080' }}>
-                  {icon}
-                </ListIcon>
-                <ListText
-                  open={open}
-                  primary={text}
-                  slotProps={{
-                    primary: {
-                      sx: {
-                        color: active === text ? '#2196f3' : '#808080',
-                        fontWeight: 500,
-                        fontSize: '0.9rem',
-                      },
+                primary={text}
+                slotProps={{
+                  primary: {
+                    sx: {
+                      color: activePath === path ? '#2196f3' : '#808080',
+                      fontWeight: 500,
+                      fontSize: '16px',
                     },
-                  }}
-                />
-              </ListItemBtn>
-            </ListItem>
-          ))}
-        </List>
+                  },
+                }}
+              />
+            </ListItemBtn>
+          </ListItem>
+        ))}
       </List>
 
-      <LogoutButton startIcon={<LogoutIcon sx={{ color: 'white' }} />}>
+      <LogoutButton
+        startIcon={<LogoutIcon sx={{ color: 'white' }} />}
+        onClick={() => navigate('/login')}
+      >
         {open && 'Log Out'}
       </LogoutButton>
     </Drawer>

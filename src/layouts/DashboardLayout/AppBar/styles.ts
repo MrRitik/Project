@@ -1,4 +1,3 @@
-// styles.ts
 import { AppBar, Avatar, Box, Toolbar } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import type { SxProps, Theme } from '@mui/material';
@@ -34,13 +33,12 @@ export const StyledAvatar = styled(Avatar)({
   height: 36,
 });
 
-// Bold arrow icon styling with left margin
 export const BackIcon: SxProps<Theme> = {
   color: '#333',
   fontWeight: 900,
   marginLeft: 10,
   '& .MuiSvgIcon-root': {
-    fontSize: '1.25rem', // adjust for visibility
+    fontSize: '1.25rem',
     fontWeight: 700,
   },
 };

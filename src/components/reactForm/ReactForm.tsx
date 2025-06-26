@@ -6,7 +6,7 @@ import type { RootState } from '@/redux/store';
 import { useEffect } from 'react';
 import { setFormData } from '@/redux/slices/formSlice';
 import { Box, TextField, Button, Stack } from '@mui/material';
-import { formStyles } from './styles';
+import { container, submitButton } from './styles';
 
 type FormValues = {
   name: string;
@@ -51,7 +51,7 @@ export const ReactForm = () => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={formStyles.container}>
+    <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={container}>
       <Stack spacing={3}>
         <TextField
           label="Name"
@@ -81,7 +81,7 @@ export const ReactForm = () => {
           helperText={errors.age?.message}
         />
 
-        <Button type="submit" variant="contained" sx={formStyles.submitButton}>
+        <Button type="submit" variant="contained" sx={submitButton}>
           Submit
         </Button>
       </Stack>

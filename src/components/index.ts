@@ -7,5 +7,6 @@ import { SlideImage } from './slideImage';
 import { WrappedTypography } from './wrapperTypography';
 import { Employees } from './employees';
 import { Profile } from './profile';
+import { Dashboard } from './dashboard';
 
-export { Banner, CustomSelect, Footer, NavBar, ReactForm, SlideImage, WrappedTypography, Employees, Profile };
+export { Banner, CustomSelect, Footer, NavBar, ReactForm, SlideImage, WrappedTypography, Employees, Profile, Dashboard };

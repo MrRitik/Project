@@ -1,5 +1,4 @@
-import type { SxProps } from '@mui/system';
-import type { Theme } from '@mui/material/styles';
+import type { SxProps, Theme } from '@mui/material/styles';
 
 export const profileContainer: SxProps<Theme> = {
   p: 3,
@@ -20,8 +19,9 @@ export const profileHeader: SxProps<Theme> = {
 export const editButton: SxProps<Theme> = {
   display: 'flex',
   alignItems: 'center',
-  border: '1px solid #2196f3',
-  color: '#2196f3',
+  border: '1px solid',
+  borderColor: 'primary.main',
+  color: 'primary.main',
   borderRadius: '999px',
   px: 2,
   py: 0.5,
@@ -29,9 +29,9 @@ export const editButton: SxProps<Theme> = {
   fontWeight: 500,
   backgroundColor: 'transparent',
   cursor: 'pointer',
-  transition: '0.2s',
+  transition: 'background-color 0.2s ease-in-out',
   '&:hover': {
-    backgroundColor: '#e3f2fd',
+    backgroundColor: 'primary.light',
   },
 };
 
@@ -50,13 +50,13 @@ export const sectionHeader: SxProps<Theme> = {
 };
 
 export const labelText: SxProps<Theme> = {
-  fontSize: '0.875rem',
+  fontSize: '15px',
   color: 'text.secondary',
   mb: 0.5,
 };
 
 export const valueText: SxProps<Theme> = {
-  fontSize: '1rem',
+  fontSize: '20px',
   fontWeight: 500,
   color: 'text.primary',
 };

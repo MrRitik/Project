@@ -1,33 +1,31 @@
-import { styled } from '@mui/material/styles';
-import { Box, IconButton, Stack } from '@mui/material';
+import type { SxProps, Theme } from '@mui/material/styles';
 
-// Accepts width and height as props
-export const SliderContainer = styled(Box)<{ width?: string | number; height?: string | number }>(
-  ({ width, height }) => ({
-    position: 'relative',
-    overflow: 'hidden',
-    width,
-    height,
-  }),
-);
+export const sliderContainer = (
+  width?: string | number,
+  height?: string | number,
+): SxProps<Theme> => ({
+  position: 'relative',
+  overflow: 'hidden',
+  width,
+  height,
+});
 
-// Accepts dynamic transform offset
-export const ImageWrapper = styled(Box)<{ offset: number }>(({ offset }) => ({
+export const imageWrapper = (offset: number): SxProps<Theme> => ({
   width: '100%',
   height: '100%',
   display: 'flex',
   transition: 'transform 0.5s ease',
   transform: `translateX(-${offset}%)`,
-}));
+});
 
-export const SlideImageBox = styled('img')({
+export const slideImageBox: SxProps<Theme> = {
   width: '100%',
   height: '100%',
   objectFit: 'cover',
   flexShrink: 0,
-});
+};
 
-export const ArrowButton = styled(IconButton)({
+export const arrowButton: SxProps<Theme> = {
   position: 'absolute',
   top: '50%',
   transform: 'translateY(-50%)',
@@ -36,22 +34,24 @@ export const ArrowButton = styled(IconButton)({
   '&:hover': {
     backgroundColor: 'rgba(0,0,0,0.7)',
   },
-});
+};
 
-export const DotContainer = styled(Stack)({
+export const dotContainer: SxProps<Theme> = {
   position: 'absolute',
   bottom: 10,
   left: '50%',
   transform: 'translateX(-50%)',
-});
+  display: 'flex',
+  gap: 8,
+};
 
-export const Dot = styled(Box, {
-  shouldForwardProp: prop => prop !== 'active' && prop !== 'size',
-})<{ active: boolean; size: number }>(({ theme, active, size }) => ({
-  width: size,
-  height: size,
-  borderRadius: '50%',
-  cursor: 'pointer',
-  transition: 'background-color 0.3s ease',
-  backgroundColor: active ? theme.palette.primary.main : theme.palette.grey[500],
-}));
+export const dot =
+  (active: boolean, size: number): SxProps<Theme> =>
+  theme => ({
+    width: size,
+    height: size,
+    borderRadius: '50%',
+    cursor: 'pointer',
+    transition: 'background-color 0.3s ease',
+    backgroundColor: active ? theme.palette.primary.main : theme.palette.grey[500],
+  });

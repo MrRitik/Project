@@ -1,20 +1,14 @@
 import { Box, Avatar, Typography, Button } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import {
-  profileContainer,
-  profileHeader,
-  profileInfoCard,
-  sectionHeader,
-  labelText,
-  valueText,
-  editButton,
-} from './styles';
+import { profileContainer, profileHeader, editButton } from './styles';
 import { img1 } from '@/assets/images';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from '@/redux/slices/profileSlice';
 import type { RootState } from '@/redux/store';
 import { EditProfileModal } from '../EditProfileModal';
+import { ProfileInfoSection } from './ProfileInfoSection';
+import { ProfileInfoField } from './ProfileInfoField';
 
 export const Profile = () => {
   const dispatch = useDispatch();
@@ -53,61 +47,29 @@ export const Profile = () => {
         </Box>
       </Box>
 
-      <Box sx={profileInfoCard}>
-        <Typography sx={sectionHeader}>Personal Information</Typography>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-          <Box sx={{ flex: 1, minWidth: 250 }}>
-            <Box sx={{ mb: 3 }}>
-              <Typography sx={labelText}>First Name</Typography>
-              <Typography sx={valueText}>{profileData.firstName}</Typography>
-            </Box>
-            <Box sx={{ mb: 3 }}>
-              <Typography sx={labelText}>Email Address</Typography>
-              <Typography sx={valueText}>{profileData.email}</Typography>
-            </Box>
-            <Box sx={{ mb: 3 }}>
-              <Typography sx={labelText}>Bio</Typography>
-              <Typography sx={valueText}>{profileData.bio}</Typography>
-            </Box>
-          </Box>
-          <Box sx={{ flex: 1, minWidth: 250 }}>
-            <Box sx={{ mb: 3 }}>
-              <Typography sx={labelText}>Last Name</Typography>
-              <Typography sx={valueText}>{profileData.lastName}</Typography>
-            </Box>
-            <Box sx={{ mb: 3 }}>
-              <Typography sx={labelText}>Phone</Typography>
-              <Typography sx={valueText}>{profileData.phone}</Typography>
-            </Box>
-            <Box sx={{ mb: 3 }}>
-              <Typography sx={labelText}>Date of Joining</Typography>
-              <Typography sx={valueText}>{profileData.dateOfJoining}</Typography>
-            </Box>
-          </Box>
+      <ProfileInfoSection title="Personal Information">
+        <Box sx={{ flex: 1, minWidth: 250 }}>
+          <ProfileInfoField label="First Name" value={profileData.firstName} />
+          <ProfileInfoField label="Email Address" value={profileData.email} />
+          <ProfileInfoField label="Bio" value={profileData.bio} />
         </Box>
-      </Box>
+        <Box sx={{ flex: 1, minWidth: 250 }}>
+          <ProfileInfoField label="Last Name" value={profileData.lastName} />
+          <ProfileInfoField label="Phone" value={profileData.phone} />
+          <ProfileInfoField label="Date of Joining" value={profileData.dateOfJoining} />
+        </Box>
+      </ProfileInfoSection>
 
-      <Box sx={profileInfoCard}>
-        <Typography sx={sectionHeader}>Address</Typography>
-        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 4 }}>
-          <Box sx={{ flex: 1, minWidth: 250 }}>
-            <Box sx={{ mb: 3 }}>
-              <Typography sx={labelText}>Country</Typography>
-              <Typography sx={valueText}>{profileData.country}</Typography>
-            </Box>
-            <Box sx={{ mb: 3 }}>
-              <Typography sx={labelText}>Postal Code</Typography>
-              <Typography sx={valueText}>{profileData.zipCode}</Typography>
-            </Box>
-          </Box>
-          <Box sx={{ flex: 1, minWidth: 250 }}>
-            <Box sx={{ mb: 3 }}>
-              <Typography sx={labelText}>City/State</Typography>
-              <Typography sx={valueText}>{profileData.cityState}</Typography>
-            </Box>
-          </Box>
+      <ProfileInfoSection title="Address">
+        <Box sx={{ flex: 1, minWidth: 250 }}>
+          <ProfileInfoField label="Country" value={profileData.country} />
+          <ProfileInfoField label="Postal Code" value={profileData.zipCode} />
         </Box>
-      </Box>
+        <Box sx={{ flex: 1, minWidth: 250 }}>
+          <ProfileInfoField label="City/State" value={profileData.cityState} />
+        </Box>
+      </ProfileInfoSection>
+
       <EditProfileModal
         open={isEditModalOpen}
         onClose={() => setIsEditModalOpen(false)}

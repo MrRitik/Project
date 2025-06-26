@@ -1,29 +1,32 @@
-import { Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import type { SxProps, Theme } from '@mui/system';
 
-export const DashboardWrapper = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(2),
-}));
-
-export const StatsContainer = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: theme.spacing(3),
-  marginBottom: theme.spacing(4),
-}));
-
-export const StatCardWrapper = styled(Box)(({ theme }) => ({
-  flex: '1 1 100%',
-  [theme.breakpoints.up('sm')]: {
-    flex: '1 1 48%',
+export const employeeTableWrapper: SxProps<Theme> = {
+  p: {
+    xs:1.5,
+    md:4
   },
-  [theme.breakpoints.up('md')]: {
-    flex: '1 1 22%',
-  },
-}));
+  borderRadius: 3,
+  bgcolor: '#f9f9f9',
+};
 
-export const SectionWrapper = styled(Box)(({ theme }) => ({
+export const searchBox: SxProps<Theme> = {
   display: 'flex',
-  flexWrap: 'wrap',
-  gap: theme.spacing(3),
-}));
+  alignItems: 'center',
+  border: '1px solid #ccc',
+  borderRadius: '20px',
+  px: {
+    md:3,
+    xs:0,
+  },
+  py: 0.5,
+  width: {
+    xs:220,
+    md:350
+  },
+  bgcolor: '#fff',
+};
+
+export const tableHeaderCell: SxProps<Theme> = {
+  fontWeight: 500,
+  backgroundColor: '#f0f0f0',
+};

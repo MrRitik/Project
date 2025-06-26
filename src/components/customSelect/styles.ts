@@ -1,9 +1,8 @@
-import { styled } from '@mui/material/styles';
-import { FormControl, Typography, Select } from '@mui/material';
+import type { SxProps, Theme } from '@mui/material/styles';
 
-export const StyledFormControl = styled(FormControl)({
+export const formControl: SxProps<Theme> = {
   width: '120px',
-  marginTop: '60px',
+  mt: '60px',
   '& .MuiOutlinedInput-root': {
     borderRadius: '4px',
     '& .MuiOutlinedInput-notchedOutline': {
@@ -13,20 +12,21 @@ export const StyledFormControl = styled(FormControl)({
       borderColor: '#75756f',
     },
   },
-});
-export const StyledLabel = styled(Typography)(({ theme }) => ({
-  color: '#75756f',
-  marginBottom: theme.spacing(0),
-}));
+};
 
-export const StyledSelect = styled(Select<string>)({
+export const label: SxProps<Theme> = {
+  color: '#75756f',
+  mb: 0,
+};
+
+export const select: SxProps<Theme> = {
   '& .MuiSelect-select': {
     padding: '10px',
     color: '#75756f',
   },
-});
+};
 
-export const StyledMenuPaper = {
+export const menuPaper: SxProps<Theme> = {
   boxShadow: 3,
   '& .MuiMenuItem-root': {
     display: 'flex',

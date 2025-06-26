@@ -23,7 +23,7 @@ interface Props extends TypographyProps {
   sx?: SxProps<Theme>;
   style?: React.CSSProperties;
   errorText?: string;
-  errorTextStyles?: SxProps<Theme>; // Changed from string to SxProps
+  errorTextStyles?: SxProps<Theme>; 
 }
 
 export const WrappedTypography: React.FC<Props> = ({

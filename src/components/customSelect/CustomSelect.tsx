@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import Typography from '@mui/material/Typography';
 import type { SelectChangeEvent } from '@mui/material';
-import { StyledFormControl, StyledLabel, StyledSelect, StyledMenuPaper } from './styles';
+import { formControl, label, select, menuPaper } from './styles';
 
 export const CustomSelect = () => {
   const [designation, setDesignation] = useState('');
@@ -10,22 +13,25 @@ export const CustomSelect = () => {
   };
 
   return (
-    <StyledFormControl variant="outlined">
-      <StyledLabel variant="subtitle1">Designation</StyledLabel>
-      <StyledSelect
+    <FormControl variant="outlined" sx={formControl}>
+      <Typography variant="subtitle1" sx={label}>
+        Designation
+      </Typography>
+      <Select
         id="designation-select"
         value={designation}
         onChange={handleChange}
+        sx={select}
         MenuProps={{
           PaperProps: {
-            sx: StyledMenuPaper,
+            sx: menuPaper,
           },
         }}
       >
         <MenuItem value="MD">MD</MenuItem>
         <MenuItem value="OD">OD</MenuItem>
         <MenuItem value="Dr">Dr</MenuItem>
-      </StyledSelect>
-    </StyledFormControl>
+      </Select>
+    </FormControl>
   );
 };

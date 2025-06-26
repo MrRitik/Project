@@ -1,7 +1,6 @@
-import { Box, Container, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import type { SxProps, Theme } from '@mui/material/styles';
 
-export const FooterBox = styled(Box)(({ theme }) => ({
+export const footerBox: SxProps<Theme> = theme => ({
   backgroundColor: theme.palette.grey[900],
   color: theme.palette.grey[300],
   padding: `${theme.spacing(3)} 0`,
@@ -10,9 +9,9 @@ export const FooterBox = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     padding: `${theme.spacing(2)} 0`,
   },
-}));
+});
 
-export const FooterContainer = styled(Container)(({ theme }) => ({
+export const footerContainer: SxProps<Theme> = theme => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -20,14 +19,14 @@ export const FooterContainer = styled(Container)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     minHeight: '50px',
   },
-}));
+});
 
-export const FooterText = styled(Typography)(({ theme }) => ({
+export const footerText: SxProps<Theme> = theme => ({
   textAlign: 'center',
   fontSize: theme.typography.body2.fontSize,
   fontWeight: theme.typography.fontWeightRegular,
   color: theme.palette.grey[400],
-  margin: 0,
+  m: 0,
   '& a': {
     color: theme.palette.primary.light,
     textDecoration: 'none',
@@ -36,4 +35,4 @@ export const FooterText = styled(Typography)(({ theme }) => ({
       textDecoration: 'underline',
     },
   },
-}));
+});

@@ -1,17 +1,18 @@
-import { Box, Button, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import type { SxProps, Theme } from '@mui/material/styles';
 
-export const StyledBannerContainer = styled(Box)(({ theme }) => ({
+export const bannerContainer = (height: string, minHeight: string): SxProps<Theme> => ({
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   overflow: 'hidden',
-  borderRadius: theme.shape.borderRadius,
-  boxShadow: theme.shadows[2],
-}));
+  borderRadius: 2,
+  boxShadow: 2,
+  height,
+  minHeight,
+});
 
-export const StyledBackground = styled(Box)({
+export const background: SxProps<Theme> = {
   position: 'absolute',
   top: 0,
   left: 0,
@@ -21,33 +22,39 @@ export const StyledBackground = styled(Box)({
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
   zIndex: 1,
-});
+};
 
-export const StyledOverlay = styled(Box)({
+export const overlay = (color: string, opacity: number): SxProps<Theme> => ({
   position: 'absolute',
   top: 0,
   left: 0,
   width: '100%',
   height: '100%',
   zIndex: 2,
+  backgroundColor: color,
+  opacity,
 });
 
-export const StyledContent = styled(Box)(({ theme }) => ({
-  position: 'relative',
-  zIndex: 3,
-  padding: theme.spacing(4),
-  maxWidth: '80%',
-  [theme.breakpoints.down('md')]: {
-    padding: theme.spacing(3),
-    maxWidth: '90%',
-  },
-  [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(2),
-    maxWidth: '95%',
-  },
-}));
+export const content =
+  (align: 'left' | 'center' | 'right', color: string): SxProps<Theme> =>
+  theme => ({
+    position: 'relative',
+    zIndex: 3,
+    textAlign: align,
+    color,
+    padding: theme.spacing(4),
+    maxWidth: '80%',
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(3),
+      maxWidth: '90%',
+    },
+    [theme.breakpoints.down('sm')]: {
+      padding: theme.spacing(2),
+      maxWidth: '95%',
+    },
+  });
 
-export const StyledTitle = styled(Typography)(({ theme }) => ({
+export const title: SxProps<Theme> = theme => ({
   fontSize: theme.typography.h3.fontSize,
   fontWeight: theme.typography.fontWeightBold,
   marginBottom: theme.spacing(2),
@@ -57,9 +64,9 @@ export const StyledTitle = styled(Typography)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     fontSize: theme.typography.h5.fontSize,
   },
-}));
+});
 
-export const StyledSubtitle = styled(Typography)(({ theme }) => ({
+export const subtitle: SxProps<Theme> = theme => ({
   fontSize: theme.typography.body1.fontSize,
   marginBottom: theme.spacing(3),
   lineHeight: 1.6,
@@ -67,9 +74,9 @@ export const StyledSubtitle = styled(Typography)(({ theme }) => ({
     fontSize: theme.typography.body2.fontSize,
     marginBottom: theme.spacing(2),
   },
-}));
+});
 
-export const StyledBannerButton = styled(Button)(({ theme }) => ({
+export const button: SxProps<Theme> = theme => ({
   padding: `${theme.spacing(1.5)} ${theme.spacing(3)}`,
   fontSize: theme.typography.button.fontSize,
   fontWeight: theme.typography.fontWeightMedium,
@@ -92,4 +99,4 @@ export const StyledBannerButton = styled(Button)(({ theme }) => ({
     padding: `${theme.spacing(1)} ${theme.spacing(2)}`,
     fontSize: theme.typography.body2.fontSize,
   },
-}));
+});
