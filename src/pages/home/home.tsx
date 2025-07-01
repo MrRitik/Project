@@ -1,9 +1,10 @@
-import { Container, Typography, Box } from '@mui/material';
-import { SlideImage } from '@/components/slideImage';
+import { Container, Box } from '@mui/material';
+import { WrappedTypography } from '@/components';
+import { SlideImage } from '@/components/ImagesSlides';
 import { Laptop, Mobile, Chair, Robort, Tv, Tv2 } from '@/assets/images';
-import { Banner } from '@/components/banner';
+import { Banner } from '@/components/Banner';
 import { BannerImg } from '@/assets/images';
-import { CustomSelect } from '@/components/customSelect';
+import { CustomSelect } from '@/components/CustomSelect';
 
 const imagesArr = [
   { url: Laptop, alt: 'Laptop computer' },
@@ -30,7 +31,7 @@ export const Home = () => {
         />
       </Box>
       <Container maxWidth="md">
-        <Typography variant="h4">This is the crousle</Typography>
+        <WrappedTypography type="h4">This is the crousle</WrappedTypography>
         <Box sx={{ width: '100%', height: 500, mt: 4 }}>
           <SlideImage images={imagesArr} autoPlay interval={5000} arrowSize="medium" />
         </Box>

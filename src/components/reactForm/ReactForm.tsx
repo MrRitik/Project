@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from '@/redux/store';
 import { useEffect } from 'react';
-import { setFormData } from '@/redux/slices/formSlice';
+import { setFormData } from '@/redux/Slices/formSlice';
 import { Box, TextField, Button, Stack } from '@mui/material';
 import { container, submitButton } from './styles';
 

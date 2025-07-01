@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { type ProfileData } from '@/components/EditProfileModal/EditProfileModal';
+import type { ProfileData } from '@/types/ProfileData';
 import { PROFILE_INITIAL_DATA } from '@/common';
 
 const initialState: ProfileData = {

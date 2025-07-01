@@ -1,12 +1,15 @@
-import { Banner } from './banner';
-import { CustomSelect } from './customSelect';
-import { Footer } from './footer';
-import { NavBar } from './navbar';
-import { ReactForm } from './reactForm';
-import { SlideImage } from './slideImage';
+import { Banner } from './Banner';
+import { CustomSelect } from './CustomSelect';
+import { ReactForm } from './ReactForm';
+import { SlideImage } from './ImagesSlides';
 import { WrappedTypography } from './wrapperTypography';
-import { Employees } from './employees';
-import { Profile } from './profile';
-import { Dashboard } from './dashboard';
+import { Employees } from '../pages/Employees';
 
-export { Banner, CustomSelect, Footer, NavBar, ReactForm, SlideImage, WrappedTypography, Employees, Profile, Dashboard };
+export {
+  Banner,
+  CustomSelect,
+  ReactForm,
+  SlideImage,
+  WrappedTypography,
+  Employees,
+};

@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography, { type TypographyProps } from '@mui/material/Typography';
-import type { SxProps } from '@mui/material';
-import type { Theme } from '@emotion/react';
+import type { Theme } from '@mui/material/styles';
+import type { SxProps } from '@mui/system';
 
 interface Props extends TypographyProps {
   children?: React.ReactNode;
@@ -23,7 +23,7 @@ interface Props extends TypographyProps {
   sx?: SxProps<Theme>;
   style?: React.CSSProperties;
   errorText?: string;
-  errorTextStyles?: SxProps<Theme>; 
+  errorTextStyles?: SxProps<Theme>;
 }
 
 export const WrappedTypography: React.FC<Props> = ({

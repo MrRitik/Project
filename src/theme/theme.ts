@@ -15,7 +15,7 @@ export const theme = createTheme({
       contrastText: '#ffffff',
     },
     background: {
-      default: '#f5f5f5',
+      default: '#E5E4E2',
       paper: '#ffffff',
     },
     text: {
@@ -59,7 +59,7 @@ export const theme = createTheme({
     },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 4,
   },
   spacing: 8,
   shadows: [

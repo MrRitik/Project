@@ -2,7 +2,7 @@ import { useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
-import Typography from '@mui/material/Typography';
+import { WrappedTypography } from '@/components';
 import type { SelectChangeEvent } from '@mui/material';
 import { formControl, label, select, menuPaper } from './styles';
 
@@ -14,9 +14,9 @@ export const CustomSelect = () => {
 
   return (
     <FormControl variant="outlined" sx={formControl}>
-      <Typography variant="subtitle1" sx={label}>
+      <WrappedTypography type="subtitle1" sx={label}>
         Designation
-      </Typography>
+      </WrappedTypography>
       <Select
         id="designation-select"
         value={designation}

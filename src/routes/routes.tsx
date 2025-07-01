@@ -1,10 +1,9 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Outlet } from 'react-router-dom';
 import App from '../App';
-import { MainLayout, DashboardLayout } from '@/layouts';
+import { MainLayout, SimpleLayout } from '@/layouts';
 import ProtectedRoute from './ProtectedRoute';
 import PrivateRoute from './PrivateRoute';
-import { About, Contact, Home, Login, Unauth, NotFound } from '@/pages';
-import { Dashboard, Employees, Profile } from '@/components';
+import { Home, Contact, Login, Unauth, NotFound, Profile, Dashboard, Employees } from '@/pages';
 
 const isAuthenticated = true;
 const userRole = 'admin';
@@ -15,19 +14,22 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: '/',
-        element: <MainLayout />,
+        path: '/home',
+        element: (
+          <SimpleLayout>
+            <Outlet />
+          </SimpleLayout>
+        ),
         children: [
           { index: true, element: <Home /> },
-          { path: 'about', element: <About /> },
           { path: 'contact', element: <Contact /> },
         ],
       },
       {
-        path: '/dashboard',
+        path: '/',
         element: (
           <PrivateRoute isAuthenticated={isAuthenticated}>
-            <DashboardLayout />
+            <MainLayout />
           </PrivateRoute>
         ),
         children: [
@@ -61,15 +63,8 @@ const router = createBrowserRouter([
     ],
   },
   { path: '/login', element: <Login /> },
-
-  {
-    path: '/unauthorized',
-    element: <Unauth />,
-  },
-  {
-    path: '*',
-    element: <NotFound />,
-  },
+  { path: '/unauthorized', element: <Unauth /> },
+  { path: '*', element: <NotFound /> },
 ]);
 
 export default router;

@@ -1,4 +1,5 @@
-import { Box, Paper, Typography, TextField, Button, Container, Link } from '@mui/material';
+import { Box, Paper, TextField, Button, Container, Link } from '@mui/material';
+import { WrappedTypography } from '@/components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { wrapper, paper, form, submitButton, linkBox } from './styles';
@@ -20,9 +21,9 @@ export const Login = () => {
     <Container component="main" maxWidth="xs">
       <Box sx={wrapper}>
         <Paper elevation={3} sx={paper}>
-          <Typography component="h1" variant="h5" align="center" gutterBottom>
+          <WrappedTypography type="h5" align="center" gutterBottom>
             Sign In
-          </Typography>
+          </WrappedTypography>
           <Box component="form" onSubmit={handleSubmit} sx={form}>
             <TextField
               margin="normal"

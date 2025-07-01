@@ -1,4 +1,4 @@
-import { ReactForm } from '@/components/reactForm';
+import { ReactForm } from '@/components/ReactForm';
 
 export const Contact = () => {
   return <ReactForm />;

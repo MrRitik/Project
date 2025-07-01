@@ -1,4 +1,5 @@
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
+import { WrappedTypography } from '@/components';
 import { bannerContainer, background, overlay, content, title, button } from './styles';
 
 interface BannerProps {
@@ -35,8 +36,8 @@ export const Banner = ({
       <Box sx={{ ...background, backgroundImage: `url(${imageUrl})` }} />
       <Box sx={overlay(overlayColor, overlayOpacity)} />
       <Box sx={content(textAlign, textColor)}>
-        <Typography sx={title}>{heading}</Typography>
-        {subtitle && <Typography>{subtitle}</Typography>}
+        <WrappedTypography sx={title}>{heading}</WrappedTypography>
+        {subtitle && <WrappedTypography>{subtitle}</WrappedTypography>}
         {ctaText && (
           <Button type="button" onClick={onClick} sx={button}>
             {ctaText}

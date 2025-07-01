@@ -10,12 +10,12 @@ export const notFoundWrapper: SxProps<Theme> = {
 
 export const notFoundTitle: SxProps<Theme> = theme => ({
   fontSize: '6rem',
-  color: '#ff4d4f',
+  color: theme.palette.error.main,
   marginBottom: theme.spacing(2),
   fontWeight: 700,
 });
 
 export const notFoundText: SxProps<Theme> = {
   fontSize: '2rem',
-  color: '#333',
+  color: theme => theme.palette.text.primary,
 };
