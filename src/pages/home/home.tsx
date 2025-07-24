@@ -5,6 +5,7 @@ import { Laptop, Mobile, Chair, Robort, Tv, Tv2 } from '@/assets/images';
 import { Banner } from '@/components/Banner';
 import { BannerImg } from '@/assets/images';
 import { CustomSelect } from '@/components/CustomSelect';
+import { useState } from 'react';
 
 const imagesArr = [
   { url: Laptop, alt: 'Laptop computer' },
@@ -15,7 +16,14 @@ const imagesArr = [
   { url: Tv2, alt: 'Smart television' },
 ];
 
+const options = [
+  { value: 'MD', label: 'MD' },
+  { value: 'OD', label: 'OD' },
+  { value: 'Dr', label: 'Dr' },
+];
+
 export const Home = () => {
+  const [designation, setDesignation] = useState('');
   return (
     <>
       <Box width={'100%'}>
@@ -37,7 +45,12 @@ export const Home = () => {
         </Box>
       </Container>
       <Box display="flex" justifyContent="center" alignItems="center" width="100%" mb={10}>
-        <CustomSelect />
+        <CustomSelect
+          label="Designation"
+          value={designation}
+          onHandleChange={(e) => setDesignation(e.target.value)}
+          options={options}
+        />
       </Box>
     </>
   );

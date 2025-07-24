@@ -1,26 +1,40 @@
-import { useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import { WrappedTypography } from '@/components';
 import type { SelectChangeEvent } from '@mui/material';
-import { formControl, label, select, menuPaper } from './styles';
+import { formControl, label as labelStyle, select, menuPaper } from './styles';
+import type { FC } from 'react';
 
-export const CustomSelect = () => {
-  const [designation, setDesignation] = useState('');
-  const handleChange = (event: SelectChangeEvent) => {
-    setDesignation(event.target.value);
-  };
+interface Option {
+  value: string;
+  label: string;
+}
 
+interface CustomSelectProps {
+  id?: string;
+  label: string;
+  value: string;
+  onHandleChange: (event: SelectChangeEvent) => void;
+  options: Option[];
+}
+
+export const CustomSelect: FC<CustomSelectProps> = ({
+  id = 'designation-select',
+  label,
+  value,
+  onHandleChange,
+  options,
+}) => {
   return (
     <FormControl variant="outlined" sx={formControl}>
-      <WrappedTypography type="subtitle1" sx={label}>
-        Designation
+      <WrappedTypography type="subtitle1" sx={labelStyle}>
+        {label}
       </WrappedTypography>
       <Select
-        id="designation-select"
-        value={designation}
-        onChange={handleChange}
+        id={id}
+        value={value}
+        onChange={onHandleChange}
         sx={select}
         MenuProps={{
           PaperProps: {
@@ -28,9 +42,11 @@ export const CustomSelect = () => {
           },
         }}
       >
-        <MenuItem value="MD">MD</MenuItem>
-        <MenuItem value="OD">OD</MenuItem>
-        <MenuItem value="Dr">Dr</MenuItem>
+        {options.map(option => (
+          <MenuItem key={option.value} value={option.value}>
+            {option.label}
+          </MenuItem>
+        ))}
       </Select>
     </FormControl>
   );

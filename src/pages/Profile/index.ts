@@ -1,5 +1,5 @@
-export { ProfileValidationSchema } from './Components/ProfileValidationSchema' 
 export {Profile} from './Profile'
+export { ProfileValidationSchema } from './Components/ProfileValidationSchema' 
 export {ProfileForm} from './Components/ProfileForm'
 export {FormTextField} from './Components/FormTextField'
 export {ProfileInfoField} from './Components/ProfileInfoField'

@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProfile } from '@/redux/Slices/profileSlice';
 import type { RootState } from '@/redux/store';
-import { ProfileForm } from '@/pages/Profile/Components/ProfileForm';
+import { ProfileForm } from './Components/ProfileForm';
 import { ProfileInfoSection } from './Components/ProfileInfoSection/ProfileInfoSection';
 import { ProfileInfoField } from './Components/ProfileInfoField';
 
